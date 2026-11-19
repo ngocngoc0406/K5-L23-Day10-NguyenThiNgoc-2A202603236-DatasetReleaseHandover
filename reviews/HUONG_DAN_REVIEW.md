@@ -11,7 +11,7 @@ Hàng đợi review từ `submission/de_an/candidates.json` có **12 ứng viên
 - **Ảnh 2 — `img_0029`** (type: `swap`): Detection ghi `couch`, Panoptic ghi `chair`.
 - **Ảnh 3 — `img_0041`** (type: `missing_box`): Segment `knife` (989 px) không có box detection.
 > **Lệnh xuất ảnh review:**  
-> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 1/4 --out review_quang_imgs`
+> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 1/4 --out runs/de_an_review/quang`
 
 ---
 
@@ -20,7 +20,7 @@ Hàng đợi review từ `submission/de_an/candidates.json` có **12 ứng viên
 - **Ảnh 5 — `img_0061`** (type: `bbox_drift`): Box `person` (IoU 0.63, 97% pixel segment trong box, 1/4 mép khớp).
 - **Ảnh 6 — `img_0065`** (type: `swap`): Detection ghi `cow`, Panoptic ghi `horse`.
 > **Lệnh xuất ảnh review:**  
-> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 2/4 --out review_mai_imgs`
+> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 2/4 --out runs/de_an_review/mai`
 
 ---
 
@@ -29,7 +29,7 @@ Hàng đợi review từ `submission/de_an/candidates.json` có **12 ứng viên
 - **Ảnh 8 — `img_0126`** (type: `instance_merge`): 1 segment `bottle` phủ 2 box cùng lớp.
 - **Ảnh 9 — `img_0136`** (type: `bbox_drift`): Box `skis` (IoU 0.59, 100% pixel segment trong box, 2/4 mép khớp).
 > **Lệnh xuất ảnh review:**  
-> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 3/4 --out review_manh_imgs`
+> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 3/4 --out runs/de_an_review/manh`
 
 ---
 
@@ -38,7 +38,7 @@ Hàng đợi review từ `submission/de_an/candidates.json` có **12 ứng viên
 - **Ảnh 11 — `img_0190`** (type: `swap`): Detection ghi `cow`, Panoptic ghi `horse`.
 - **Ảnh 12 — `img_0214`** (type: `missing_box`): Segment `car` (488 px) không có box detection.
 > **Lệnh xuất ảnh review:**  
-> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 4/4 --out review_ngoc_imgs`
+> `python tools/view.py delivery --candidates submission/de_an/candidates.json --part 4/4 --out runs/de_an_review/ngoc`
 
 ---
 
@@ -63,8 +63,10 @@ Mỗi người mở file `.csv` của mình (dùng Notepad, VSCode hoặc Excel)
 
 ## 3. Lệnh ghép review sau khi cả nhóm hoàn thành
 
-Ngọc Mai (TV2) nhận 4 file và chạy lệnh ghép:
+Ngọc Mai (TV2) nhận 4 file (để trong `reviews/`) và chạy lệnh ghép, rồi gộp vào `errors.json`:
 ```powershell
-python tools/merge_reviews.py review_quang.csv review_mai.csv review_manh.csv review_ngoc.csv --out review_log.csv
+python tools/merge_reviews.py reviews/review_quang.csv reviews/review_mai.csv reviews/review_manh.csv reviews/review_ngoc.csv --out submission/de_an/review_log.csv
+python scripts/merge_review.py --rules submission/de_an/rules.json --review submission/de_an/review_log.csv --out submission/de_an/errors.json
 ```
-Script sẽ tự động kiểm tra định dạng và báo lỗi nếu có dòng nào chưa điền hoặc ghi chú < 20 ký tự.
+Script sẽ tự động kiểm tra định dạng và báo lỗi nếu có dòng nào chưa điền, ghi chú < 20 ký tự, hoặc còn `swap` chưa đổi.
+`review_log.csv` **phải nằm ở `submission/de_an/`** (vị trí người chấm đọc).
