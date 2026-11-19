@@ -1,21 +1,40 @@
-# Báo cáo nhóm <<XX>>
+# Báo cáo nhóm 68
+
+> Các mục ghi **[cập nhật sau review]** sẽ điền số cuối sau khi cả nhóm xem ảnh xong (review_log.csv).
 
 ## 1. Số liệu luyện tập
-- F1 theo seed (rule / cross_check / overall): <<seed: ... / ... / ...>>
-- Số ứng viên trên lô sạch (`--no-faults`): <<...>>; hàng đợi trên seed luyện tập: <<... ảnh>>
-- Ngưỡng đã chọn và cách chọn (không dùng `_private`): <<...>>
+- **F1 lỗi luật** (`score_findings.py`, làm tròn 0,1): ≈ 1.0 trên seed luyện tập 68007 và các seed thử 68104, 11, 4242, lô giả lập đề ẩn `--opaque` seed 777; lô sạch `runs/clean` báo **0** lỗi luật.
+- **Truy vết**: tier_a / tier_b / notify ≈ 1.0 / 1.0 / 1.0 trên cả 5 lô trên.
+- **F1 lỗi gán nhãn sau review** (seed 68007): [cập nhật sau review].
+- **Số ứng viên trên lô sạch** (`--no-faults`, 50 ảnh): bản đầu của crosscheck **5** (toàn `instance_merge`), bản cuối **1**. Hàng đợi trên seed luyện tập 68007: **11 ảnh** (bản đầu: 30).
+- **Ngưỡng đã chọn và cách chọn** (không dùng `_private`):
+  1. *Lô sạch*: mọi ứng viên ở đây là lệch tự nhiên của COCO → chọn ngưỡng sao cho số này nhỏ.
+  2. *Lỗi giả tự gài* trong bộ nhớ trên lô sạch (dịch/đổi cỡ box, xoá box, đổi lớp, gộp 2 segment) để đo tỉ lệ bắt được từng loại: drift 90%, missing_box 92%, swap 98%, merge 91%.
+  3. *Dấu hiệu bbox_drift*: đếm số mép box khớp mép bbox segment (lệch ≤ 3% cỡ box). Trên lô sạch 434/435 box khớp ≥ 3 mép; box bị dịch thường khớp ≤ 2 mép. Tỉ lệ pixel trong box đơn thuần không đủ (box phóng to vẫn chứa gần hết segment).
+  4. *instance_merge*: chỉ báo khi bbox segment ≈ hợp của ≥ 2 box cùng lớp (IoU ≥ 0,7) và các box đó không có segment riêng; bỏ được các ca người đứng sát nhau.
+  5. *duplicate_box*: cùng lớp, w/h chênh ≤ 1 px, tâm lệch ≤ 3 px (không dùng IoU vì COCO có cặp box tự nhiên chồng nhau tới IoU ~0,66). *bbox_out_of_bounds*: tràn > 1e-4 (toạ độ chuẩn hoá), lớn hơn sai số làm tròn 6 chữ số thập phân.
 
 ## 2. Vì sao báo hết ứng viên làm F1 giảm?
-<<Trả lời bằng số của nhóm.>>
+F1 tính trên cặp (type, target); báo thừa làm giảm precision y như bỏ sót làm giảm recall. Ứng viên chỉ là chỗ hai nguồn nhãn lệch nhau, mà COCO vốn lệch tự nhiên (vật bị che, crowd, mask panoptic khác instance mask). Số của nhóm: nếu coi **mọi** ứng viên là lỗi, F1 lỗi gán nhãn trên 4 seed chỉ **0,1–0,2** với bản crosscheck đầu (~30 ứng viên/lô, phần lớn là lệch tự nhiên) và **0,5–0,6** với bản cuối (~11 ứng viên/lô). Ngoài ra ứng viên `swap` không cho biết bên nào sai: báo bừa `class_swap` thì một nửa số ca sai loại. Phải mở ảnh để bỏ lệch tự nhiên (`rejected`) và chọn đúng loại, F1 sau review: [cập nhật sau review].
 
 ## 3. Quyết định và lineage
-<<QC v1 a/b, kết luận, vì sao R-021 phải xem lại hoặc train lại.>>
+- QC v1 (seed 68007, `lab250_1bfe29bf7f88`): riêng lỗi luật đã là **9/250 = 3,6% > 2%** → **HOLD** (đã ghi `lineage.py record --event decision --decision HOLD`). Số cuối sau khi thêm lỗi gán nhãn đã confirmed: [cập nhật sau review].
+- `lineage.py impact` → `R-021: affected=True action=review_or_retrain`. R-021 đã train trên v1 có lỗi; sửa dataset thành v2 không làm model quên những gì đã học từ nhãn sai (box lệch, lớp sai, vật thiếu box). Vì vậy phải đánh giá lại R-021 trên dữ liệu đã sửa, và nếu lỗi ảnh hưởng (ví dụ lớp `truck` trong ticket) thì train lại trên v2.
+- v2 `lab250_1bfe29bf7f88_v2` ghi `release --parent lab250_1bfe29bf7f88`, nên từ v2 truy ngược được về v1 và run R-021.
 
 ## 4. Hash chứng minh gì, không chứng minh gì?
-<<>>
+- **Chứng minh**: file không đổi một byte nào so với lúc lập manifest. Nhờ vậy biết v1 không bị ghi đè (H1), nhãn trong v2 đúng là nhãn đã gán, không sửa tay (H7), và zip v2 đóng gói lại ra đúng mã `.sha256` (H15). `wrong_hash` cũng được phát hiện bằng cách tự tính sha256 trên bytes rồi so.
+- **Không chứng minh**: nhãn đúng. Một box lệch hay sai lớp vẫn có hash hợp lệ; hash chỉ nói "đây đúng là file đó", không nói "file đó đúng". Hash sai cũng không có nghĩa ảnh hỏng: ở lô 68007, manifest của ảnh `000000009590` ghi sha256 của ảnh `000000005037` (so khớp với hash tự tính của cả lô), còn file `000000009590.jpg` vẫn giải mã được (640×427) và đúng nội dung (nhóm người ngồi ăn quanh bàn). Vì vậy giữ ảnh trong v2 và ghi hash thật vào `manifest.csv`, thay vì đưa vào rework.
 
 ## 5. Truy vết
-<<Tiêu chí tầng a/b, vì sao lấy guideline theo job.>>
+- Ticket báo lớp `truck` (seed 68007) ở scene_365 và scene_679; changelog: v1.3 bắt buộc gán box cho `truck` bị che / cắt mép, v1.2 cho phép bỏ qua.
+- **tier_a**: ảnh trong scene_365, scene_679, thuộc job theo guideline cũ v1.2 (tra ở `jobs.csv`), có ≥ 1 box `truck` trong `labels/` → 2 ảnh.
+- **tier_b**: các ảnh khác cùng điều kiện (job v1.2, có box `truck`) mà team AI chưa báo → 4 ảnh.
+- **notify**: người gán + người kiểm của các job chứa ảnh tầng a và b → A04, A05, Q01, Q03.
+- **Vì sao lấy guideline theo job, không theo ảnh**: guideline ghi ở từng ảnh có thể chính là lỗi `guideline_mismatch` (lô 68007 có 2 ảnh như vậy). Job là đơn vị giao việc: người gán làm cả job theo một bản guideline, nên bản ghi ở job mới phản ánh quy tắc thật đã áp dụng.
+- `tools/trace_query.py` tự đọc lớp và cảnh từ changelog/ticket, không ghi cứng; chọn bản guideline mới nhất theo số phiên bản lớn nhất.
 
-## 6. Bug hoặc điểm chưa rõ trong lab (nếu có)
-<<>>
+## 6. Bug hoặc điểm chưa rõ trong lab
+- **Windows: `run_lab.py` lỗi `UnicodeEncodeError`** dù đã chạy `py -X utf8`: `run_lab.py` gọi `inject_release.py` bằng subprocess, tiến trình con không nhận chế độ UTF-8 nên lỗi khi in chữ có dấu (lô vẫn tạo ra nhưng bước ghi lineage R-021 bị bỏ). Cách tránh: đặt `$env:PYTHONUTF8 = "1"` trước khi chạy.
+- **`download_public.py` tải lại từ đầu khi rớt mạng**: file `.part` mở chế độ `wb` nên mỗi lần thử lại mất phần đã tải (file panoptic ~820 MB). Nhóm phải tải tiếp bằng `curl -C -` rồi đặt vào `data_source/cache/`.
+- Máy có hai bản Python (`py` 3.14 không có Pillow, `python` 3.12 có): công cụ xem ảnh phải chạy bằng `python`.
