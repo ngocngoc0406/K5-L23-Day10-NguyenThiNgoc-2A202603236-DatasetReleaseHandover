@@ -1,6 +1,7 @@
 """Dựng lô v2 từ errors.json, không sửa v1 (TV3 — Phạm Đức Mạnh).
 
   python tools/build_v2.py runs/r68007 [--broken 000000xxxx ...] [--notes notes_v2.txt]
+  python tools/build_v2.py runs/r68007 --pending-review 8   # giữ v2 Hold khi chưa review hết
 
 Tạo runs/r<seed>/handover/<release_id>_v2/ gồm:
   images/, labels/     ảnh + nhãn GIỮ NGUYÊN của v1, trừ ảnh phải gán lại
@@ -47,7 +48,7 @@ def sha(p: Path) -> str:
 
 def write_csv(path: Path, header: list[str], rows: list[list]) -> None:
     with path.open("w", encoding="utf-8", newline="") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(header)
         w.writerows(rows)
 
@@ -65,7 +66,10 @@ def main() -> int:
     ap.add_argument("run", help="runs/r<seed>")
     ap.add_argument("--broken", nargs="*", default=[], help="ảnh wrong_hash đã mở kiểm và thấy HỎNG (vào rework)")
     ap.add_argument("--notes", help="file văn bản thêm vào Ghi chú của README (phần TV4)")
+    ap.add_argument("--pending-review", type=int, default=0, help="số ứng viên còn chờ review; lớn hơn 0 thì kết luận v2 là Hold")
     args = ap.parse_args()
+    if args.pending_review < 0:
+        ap.error("--pending-review phải không âm")
 
     run = Path(args.run)
     d = Delivery(run / "delivery")
@@ -141,6 +145,14 @@ def main() -> int:
     ]
     if args.notes:
         notes.append(Path(args.notes).read_text(encoding="utf-8").replace("\n", " ").strip())
+    if args.pending_review:
+        notes.append(f"Còn {args.pending_review} ứng viên chờ review; giữ v2 ở trạng thái Hold cho đến khi hoàn tất kiểm tra.")
+    v2_decision = (
+        f"Hold — còn {args.pending_review} ứng viên chờ review; đã tách {len(rework)} ảnh lỗi detection/thiếu file, chưa chốt để train"
+        if args.pending_review else
+        f"Release — đã tách {len(rework)} ảnh lỗi nhãn detection sang rework; sửa hash, guideline, split; "
+        f"còn {len(pan)} ảnh lỗi panoptic (detection đúng) đã báo team panoptic"
+    )
     readme = [
         f"Release: {rid}_v2",
         f"Parent: {rid}",
@@ -149,11 +161,10 @@ def main() -> int:
         f"Guideline: {job_ranges(d.jobs)}",
         f"QC v1: {n_err}/{len(d.manifest)} = {rate:.1%}",
         f"Kết luận v1: {v1}",
-        f"Kết luận v2: Release — đã tách {len(rework)} ảnh lỗi nhãn detection sang rework; sửa hash, guideline, split; "
-        f"còn {len(pan)} ảnh lỗi panoptic (detection đúng) đã báo team panoptic",
+        f"Kết luận v2: {v2_decision}",
         "Ghi chú: " + " ".join(notes),
     ]
-    (v2 / "README.txt").write_text("\n".join(readme) + "\n", encoding="utf-8")
+    (v2 / "README.txt").write_text("\n".join(readme) + "\n", encoding="utf-8", newline="\n")
     print(f"{v2}: {len(keep)} ảnh, {sum(counts.values())} nhãn, rework {len(rework)}, QC v1 {n_err}/{len(d.manifest)} = {rate:.1%}")
     if hash_ok:
         print(f"NHẮC: mở kiểm các ảnh wrong_hash {hash_ok}; ảnh nào hỏng thì chạy lại với --broken <tên>")

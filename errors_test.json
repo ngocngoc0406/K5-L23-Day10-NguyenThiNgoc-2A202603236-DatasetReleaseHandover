@@ -1,0 +1,24 @@
+{
+  "description": "Handcrafted synthetic findings for testing tools/build_v2.py only. These findings are not review results or ground truth.",
+  "delivery_seed": 68007,
+  "synthetic": true,
+  "not_for_submission_or_scoring": true,
+  "errors": [
+    {"type": "missing_image", "target": "000000000139"},
+    {"type": "wrong_hash", "target": "000000009590"},
+    {"type": "invalid_class", "target": "000000000285"},
+    {"type": "bbox_out_of_bounds", "target": "000000014038"},
+    {"type": "duplicate_box", "target": "000000002923"},
+    {"type": "duplicate_box", "target": "000000003845"},
+    {"type": "scene_leak", "target": "scene_838"},
+    {"type": "guideline_mismatch", "target": "000000002157"},
+    {"type": "guideline_mismatch", "target": "000000019109"},
+    {"type": "invalid_category_id", "target": "000000010707"},
+    {"type": "thing_overlap", "target": "000000016249"},
+    {"type": "class_swap", "target": "000000000632"},
+    {"type": "bbox_drift", "target": "000000000724"},
+    {"type": "missing_box", "target": "000000000776"},
+    {"type": "category_swap", "target": "000000000785"},
+    {"type": "instance_merge", "target": "000000000802"}
+  ]
+}

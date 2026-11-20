@@ -1,0 +1,4 @@
+image,type,verdict,note
+img_0108,category_swap,confirmed,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): vật dưới mèo có thân máy bạc mỏng, góc bo tròn, mép gập phía sau và dây cắm cạnh bên, phù hợp laptop; detection ghi laptop hợp lý, còn panoptic ghi tv không phù hợp."
+img_0126,instance_merge,rejected,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): vùng phóng to cho thấy mask bao một chai nâu phía trước, cổ dài và nhãn vàng; các chai phía sau có segment riêng, box chồng lấn do che khuất nên chưa có bằng chứng gộp hai chai."
+img_0136,bbox_drift,rejected,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): ván trượt ở xa rất mảnh, cao khoảng 4 pixel; box vẫn bám đúng vị trí và chứa đủ 52/52 pixel segment. Chênh lệch chủ yếu ở hai đầu ván, chưa thấy bằng chứng box bị dịch khỏi vật."

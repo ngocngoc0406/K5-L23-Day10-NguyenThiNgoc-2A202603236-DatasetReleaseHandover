@@ -1,0 +1,76 @@
+PHẠM VI CÔNG VIỆC TV3
+
+Tài liệu ghi lại việc đọc scripts/check_handover.py và kiểm tra sản phẩm
+bàn giao. Chỉ báo cáo các mục thuộc phân công TV3.
+
+H1–H17 KIỂM GÌ?
+
+H1: Tính lại release_id từ manifest.json + metadata.json; kiểm tra hash
+    nhãn detection, mask và panoptic.json của v1 để phát hiện sửa delivery.
+H2: errors.json tồn tại và có đủ lỗi mức file mà bộ kiểm tự tìm thấy:
+    missing_image, wrong_hash, guideline_mismatch, scene_leak,
+    invalid_class và bbox_out_of_bounds.
+H3: review_log.csv không rỗng; mọi lỗi gán nhãn trong errors.json có dòng
+    confirmed tương ứng. Tất cả ghi chú dài ít nhất 20 ký tự, ít nhất 70%
+    ghi chú khác nhau. PASS không thay thế việc thành viên thật sự xem ảnh.
+H4: v2 đủ images/, labels/, manifest.csv, label_summary.csv,
+    truyvet.csv, README.txt và rework_queue.csv.
+H5: Tên ảnh và nhãn khớp nhau; ảnh lỗi detection/thiếu file vào rework;
+    ảnh rework có lỗi được báo và không còn trong images/ của v2.
+    Theo GUIDE, ảnh chỉ lỗi panoptic phải ở lại trong sản phẩm detection.
+H6: Người gán/người kiểm trong rework_queue.csv đúng theo jobs.csv.
+H7: Hash nhãn detection v2 giữ nguyên như v1; không có ảnh lạ.
+H8: manifest.csv liệt kê đúng mọi file images/ và labels/ với SHA256 thật.
+H9: label_summary.csv đúng tên lớp và số box mỗi lớp; TOTAL đúng tổng.
+H10: truyvet.csv đúng tập ảnh v2, scene_id, job_id, người gán/người kiểm
+     và guideline. Guideline lấy theo job, không theo metadata ảnh.
+H11: Trong truyvet.csv, mỗi scene chỉ thuộc một split.
+H12: README.txt đúng Release, Parent, Số ảnh và Số nhãn theo file thật.
+H13: QC v1 có tử số là số target lỗi khác nhau, mẫu số là tổng ảnh v1.
+     Trên 2% thì Hold/Rework; ngược lại Release. Có kết luận v2 hợp lệ.
+     H13b kiểm thêm: lineage đã HOLD thì README không được ghi v1 Release.
+H14: Lineage có decision HOLD v1 và release v2 với parent là v1.
+H15: Dựng lại ZIP bằng pack_release.build_zip, so với mã trong .sha256.
+H16: trace.json có tier_a, tier_b, notify là danh sách; tier_a và notify
+     không rỗng. Mã ảnh/người phải tồn tại trong delivery và jobs.csv.
+     Mục này kiểm định dạng; độ đúng tiêu chí truy vết được chấm riêng.
+H17: security.md có ít nhất 3 mục ## đủ nội dung, không còn chỗ giữ sẵn;
+     mục khuôn mặt kết luận Hold và nêu mã ảnh thật trong lô.
+
+DỮ LIỆU THỬ CHO BUILD_V2
+
+errors_test.json ở gốc repo là bộ lỗi giả viết tay cho seed 68007:
+14 loại lỗi, mỗi loại 1–2 target, tổng 16 trường hợp.
+Chỉ dùng để thử luồng dựng v2; không đưa vào kết quả thật hoặc tính F1.
+Kiểm thử trên bản sao delivery trong thư mục tạm, không sửa v1.
+
+Kết quả thử: 242 ảnh giữ lại, 1.642 box, 8 ảnh rework, 484 mục manifest;
+4 ảnh lỗi panoptic vẫn ở lại. Đạt 10 kiểm tra: chọn ảnh/nhãn, giữ panoptic,
+đúng người giao rework, nhãn nguyên bản, hash manifest, thống kê nhãn,
+guideline theo job, một split mỗi cảnh, delivery không thay đổi và metadata LF.
+Log lưu tại runs/tv3_checks/fixture_build.txt và fixture_summary.json.
+
+SỐ LIỆU BẢN V2 HIỆN TẠI VÀ CHUẨN BỊ VẤN ĐÁP
+
+- V1 có 250 bản ghi; kết quả thật hiện có 12 target lỗi đã xác nhận:
+  9 lỗi luật + 3 lỗi review; QC 12/250 = 4,8% > 2% nên HOLD.
+- V2 có 245 ảnh và 245 file nhãn: đã tách 5 ảnh lỗi detection để rework.
+- Số nhãn 1.667 là số box, không phải số file TXT.
+- Manifest có 490 mục = 245 JPG + 245 TXT.
+- ZIP có 495 file = 490 file dữ liệu + 5 file CSV/README trong thư mục v2.
+- 3 ảnh chỉ lỗi panoptic vẫn ở lại: 000000009772, 000000010707,
+  000000016249.
+- 1 ảnh wrong_hash 000000009590 được giữ theo kết quả kiểm ảnh đã có;
+  manifest v2 ghi hash thật của file này.
+- Guideline v1.2 cho J01–J03, v1.3 cho J04–J10; lấy theo jobs.csv.
+- Scene scene_838 được đưa về một split, tránh rò train/val.
+- R-021: affected=True, action=review_or_retrain. Đổi dataset không tự
+  sửa model đã học từ v1 lỗi.
+- Hash xác nhận byte của file, không xác nhận nhãn đúng hoặc dữ liệu sạch.
+- Bộ kiểm hiện 17 PASS, 0 FAIL; review_log.csv có 3 dòng đã được nhóm
+  xác nhận. Còn 8/11 ứng viên chưa review nên v2 vẫn Hold, chưa chốt train.
+- Review luyện tập phần 3/4 lưu ở reviews/r68007/review_manh.csv.
+- Review đề ẩn phần 3/4 đã chốt riêng trong reviews/review_manh.csv.
+- Đã export kết quả thật hiện có sang submission/r68007; cần chạy lại
+  sau khi nhận thêm review còn lại để chốt bàn giao cuối.
+- Commit và push chỉ thực hiện khi có yêu cầu riêng của người dùng.
