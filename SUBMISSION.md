@@ -50,11 +50,11 @@ submission/
 
 ## Checklist trước khi nộp
 
-- [ ] Validator chỉ đọc `delivery/`, chạy được trên lô sạch mà không báo lỗi luật nào.
-- [ ] Mọi lỗi gán nhãn trong `errors.json` có dòng `confirmed` trong `review_log.csv`, ghi rõ thấy gì.
-- [ ] v1 giữ nguyên; v2 có manifest + sha256, label summary, truy vết, rework queue, README.
-- [ ] Lineage có HOLD v1 và release v2 với parent.
-- [ ] `check_handover.py` không còn FAIL.
-- [ ] `trace.json` có `tier_a`, `tier_b`, `notify`.
-- [ ] `security.md` đủ ba mục.
-- [ ] Mỗi người có ít nhất 2 commit có nội dung.
+- [x] Validator chỉ đọc `delivery/`, chạy được trên lô sạch mà không báo lỗi luật nào.
+- [x] Mọi lỗi gán nhãn trong `errors.json` có dòng `confirmed` trong `review_log.csv`, ghi rõ thấy gì.
+- [x] v1 giữ nguyên; v2 có manifest + sha256, label summary, truy vết, rework queue, README.
+- [x] Lineage có HOLD v1 và release v2 với parent.
+- [x] `check_handover.py` không còn FAIL.
+- [x] `trace.json` có `tier_a`, `tier_b`, `notify`.
+- [x] `security.md` đủ ba mục.
+- [x] Mỗi người có ít nhất 2 commit có nội dung.

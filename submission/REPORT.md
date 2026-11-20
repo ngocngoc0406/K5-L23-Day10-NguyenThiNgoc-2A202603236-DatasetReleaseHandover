@@ -1,5 +1,12 @@
 # Báo cáo nhóm 68
 
+**Thành viên:**
+- TV1: Nguyễn Mạnh Quang (MSHV: 2A202603241)
+- TV2: Nguyễn Thị Ngọc Mai (MSHV: 2A202603188)
+- TV3: Phạm Đức Mạnh (MSHV: 2A202603079)
+- TV4: Nguyễn Thị Ngọc (MSHV: 2A202603236)
+- Seed luyện tập: 68007
+
 ## 1. Số liệu luyện tập
 - **F1 lỗi luật** (`score_findings.py`, làm tròn 0,1): ≈ 1.0 trên seed luyện tập 68007 và các seed thử 68104, 11, 4242, lô giả lập đề ẩn `--opaque` seed 777; lô sạch `runs/clean` báo **0** lỗi luật.
 - **Truy vết**: tier_a / tier_b / notify ≈ 1.0 / 1.0 / 1.0 trên cả 5 lô trên.

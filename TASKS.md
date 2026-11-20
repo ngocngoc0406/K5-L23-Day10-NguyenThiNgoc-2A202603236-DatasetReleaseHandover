@@ -58,29 +58,29 @@
 ## Chi tiết từng người
 
 ### 👤 Quang (TV1)
-- [ ] `rules_file.py`:
+- [x] `rules_file.py`:
   - `missing_image`: có trong manifest, thiếu file
   - `wrong_hash`: tự tính sha256 trên bytes (`rb`)
   - `invalid_class`: `class_id` ngoài 0–79
   - `bbox_out_of_bounds`: box vượt mép ảnh, kể cả tràn ít
   - `duplicate_box`: cùng lớp, cùng w/h, lệch tâm ≤ ~2 px
-- [ ] Tự đo `score_findings.py` trên `r<seed>`, `r<X>`, `runs/clean`: F1 luật ≈ 1.0, lô sạch 0 lỗi → **Commit 1**
-- [ ] `tools/view.py` (được dùng Pillow): vẽ box + viền segment, cắt và phóng to, nhận tên `img_0001`
-- [ ] Xem phần 1 → `review_quang.csv`
-- [ ] Mở kiểm từng ảnh `wrong_hash`: còn nguyên hay hỏng, báo Mạnh
-- [ ] REPORT §1 (F1 luật theo seed) → **Commit 2**
+- [x] Tự đo `score_findings.py` trên `r<seed>`, `r<X>`, `runs/clean`: F1 luật ≈ 1.0, lô sạch 0 lỗi → **Commit 1**
+- [x] `tools/view.py` (được dùng Pillow): vẽ box + viền segment, cắt và phóng to, nhận tên `img_0001`
+- [x] Xem phần 1 → `review_quang.csv`
+- [x] Mở kiểm từng ảnh `wrong_hash`: còn nguyên hay hỏng, báo Mạnh
+- [x] REPORT §1 (F1 luật theo seed) → **Commit 2**
 - Vấn đáp: `wrong_hash`, `duplicate_box`, `view.py`
 
 ### 👤 Ngọc Mai (TV2)
-- [ ] `crosscheck.py`:
+- [x] `crosscheck.py`:
   - ghép lớp qua tên (`classes.txt` ↔ `categories`); hàm `match(d)` ghép box ↔ segment thing theo pixel mask, bỏ `iscrowd` (**push sớm** để Ngọc dùng)
   - `class_swap`/`category_swap`: trùng chỗ, khác lớp
   - `bbox_drift`: nhiều pixel segment cùng lớp rơi ra ngoài box
   - `instance_merge`: một segment có pixel trong 2 box cùng lớp
-- [ ] Chỉnh ngưỡng trên `runs/clean` (không dựa vào tham số `inject_release.py`) → **Commit 1**
-- [ ] 1:15: đẩy `candidates.json`, chia 4 phần; xem phần 2 → `review_mai.csv`
-- [ ] Ghép 4 file review → `review_log.csv`; `merge_review.py --rules rules.json --review review_log.csv --out errors.json`; `score_findings.py`; gửi Mạnh
-- [ ] REPORT §2 (vì sao báo hết làm F1 giảm, bằng số của nhóm) → **Commit 2**
+- [x] Chỉnh ngưỡng trên `runs/clean` (không dựa vào tham số `inject_release.py`) → **Commit 1**
+- [x] 1:15: đẩy `candidates.json`, chia 4 phần; xem phần 2 → `review_mai.csv`
+- [x] Ghép 4 file review → `review_log.csv`; `merge_review.py --rules rules.json --review review_log.csv --out errors.json`; `score_findings.py`; gửi Mạnh
+- [x] REPORT §2 (vì sao báo hết làm F1 giảm, bằng số của nhóm) → **Commit 2**
 - Vấn đáp: ghép bằng pixel mask, phân biệt swap/drift/merge
 
 ### 👤 Mạnh (TV3)
@@ -97,19 +97,19 @@
 - Vấn đáp: mọi con số trong `README.txt` v2, hash chứng minh gì
 
 ### 👤 Ngọc (TV4)
-- [ ] `TEAM.md` (số nhóm, seed, GitHub), tiêu đề README → commit "P0: chia viec"
-- [ ] `rules_meta.py`:
+- [x] `TEAM.md` (số nhóm, seed, GitHub), tiêu đề README → commit "P0: chia viec"
+- [x] `rules_meta.py`:
   - `scene_leak`: cảnh có ảnh ở cả train và val, target = `scene_id`
   - `guideline_mismatch`: guideline ảnh ≠ guideline job
   - `invalid_category_id`: không có trong `categories`
   - `thing_overlap`: đếm pixel mask (`scripts/pngutil.py`, id = R + G·256 + B·256², bỏ id 0), `area` khai > pixel thật
-- [ ] Tự đo trên các seed và lô sạch → **Commit 1**
-- [ ] `missing_box.py`: segment thing lớn không có box (dùng `match` của Ngọc Mai); đếm ứng viên lô sạch, gửi Ngọc Mai
-- [ ] Xem phần 4 → `review_ngoc.csv`
-- [ ] `tools/trace_query.py`: `tier_a` (cảnh bị báo + job guideline cũ + có box lớp bị đổi), `tier_b` (ảnh khác cùng điều kiện), `notify` (người gán + kiểm của các job đó) → `trace.json`
-- [ ] Ghi chú README v2 (đã sửa hash/guideline/split, ảnh lỗi panoptic ở lại), gửi Mạnh
-- [ ] `security.md` (ca USB, năm việc được/không, ca khuôn mặt Hold + báo người phụ trách, tên ảnh có người)
-- [ ] REPORT §1 (ứng viên lô sạch, ngưỡng), §5, §6 → **Commit 2**
+- [x] Tự đo trên các seed và lô sạch → **Commit 1**
+- [x] `missing_box.py`: segment thing lớn không có box (dùng `match` của Ngọc Mai); đếm ứng viên lô sạch, gửi Ngọc Mai
+- [x] Xem phần 4 → `review_ngoc.csv`
+- [x] `tools/trace_query.py`: `tier_a` (cảnh bị báo + job guideline cũ + có box lớp bị đổi), `tier_b` (ảnh khác cùng điều kiện), `notify` (người gán + kiểm của các job đó) → `trace.json`
+- [x] Ghi chú README v2 (đã sửa hash/guideline/split, ảnh lỗi panoptic ở lại), gửi Mạnh
+- [x] `security.md` (ca USB, năm việc được/không, ca khuôn mặt Hold + báo người phụ trách, tên ảnh có người)
+- [x] REPORT §1 (ứng viên lô sạch, ngưỡng), §5, §6 → **Commit 2**
 - Vấn đáp: `thing_overlap`, `scene_leak`, tầng a/b, ca khuôn mặt
 
 ---
