@@ -1,0 +1,2 @@
+# Bài nộp có sha256 (manifest.csv, .sha256): giữ nguyên byte, không đổi LF <-> CRLF khi checkout trên Windows
+submission/** -text
