@@ -1,0 +1,4 @@
+image,type,verdict,note
+img_0056,bbox_drift,confirmed,"Box xe tải bị lệch so với viền segment panoptic trong ảnh."
+img_0061,bbox_drift,rejected,"Box vẫn bao đúng người; phần mask khác biệt có thể do nhãn tự nhiên."
+img_0065,class_swap,confirmed,"detection ghi 'cow', panoptic ghi 'horse'"
