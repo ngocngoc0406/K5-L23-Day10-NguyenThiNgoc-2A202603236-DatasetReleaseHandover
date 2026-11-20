@@ -1,0 +1,13 @@
+image,type,verdict,note
+img_0056,bbox_drift,confirmed,Box xe tải bị lệch so với viền segment panoptic trong ảnh.
+img_0061,bbox_drift,rejected,Box vẫn bao đúng người; phần mask khác biệt có thể do nhãn tự nhiên.
+img_0065,category_swap,confirmed,"Mai xem ảnh (sửa từ class_swap): con bê Hereford mặt trắng, lông xoăn trên trán, tai nâu đỏ, mũi to ướt, trong chuồng có xích: là bò; detection ghi cow đúng, panoptic ghi horse sai"
+img_0108,category_swap,confirmed,"vật dưới mèo có thân máy bạc mỏng, góc bo tròn, mép gập phía sau và dây cắm cạnh bên, phù hợp laptop; detection ghi laptop hợp lý, còn panoptic ghi tv không phù hợp."
+img_0126,instance_merge,rejected,"vùng phóng to cho thấy mask bao một chai nâu phía trước, cổ dài và nhãn vàng; các chai phía sau có segment riêng, box chồng lấn do che khuất nên chưa có bằng chứng gộp hai chai."
+img_0136,bbox_drift,rejected,"ván trượt ở xa rất mảnh, cao khoảng 4 pixel; box vẫn bám đúng vị trí và chứa đủ 52/52 pixel segment. Chênh lệch chủ yếu ở hai đầu ván, chưa thấy bằng chứng box bị dịch khỏi vật."
+img_0177,missing_box,confirmed,"mèo Xiêm nằm trên laptop bạc đang mở, thấy rõ màn hình, bàn phím, touchpad; detection chỉ có box cat, thiếu box laptop"
+img_0190,class_swap,confirmed,"con vật ở mép trái màu nâu sẫm, đuôi lông đen dài như ngựa đang được cưỡi bên cạnh; panoptic ghi horse đúng, detection ghi cow sai"
+img_0214,missing_box,rejected,"mọi xe nhìn thấy (bạc, van cam, đỏ, xe mép phải) đều có box; segment car 488 px chỉ là dải mỏng phần xe bị người và xe khác che, lệch tự nhiên"
+img_0019,class_swap,confirmed,"vật trong tay em bé là điều khiển TV màu xám, nhiều nút số, nút đỏ ở đầu; panoptic ghi remote đúng, detection ghi cell phone sai"
+img_0029,class_swap,confirmed,"góc trên phải là phần tựa ghế gỗ đơn cạnh mép chảo, không phải sofa; panoptic ghi chair đúng, detection ghi couch sai"
+img_0041,missing_box,confirmed,"con dao cắt bánh lưỡi đen nhìn rõ, tay người cầm cắm vào bánh cưới, panoptic có segment knife nhưng detection không có box knife"

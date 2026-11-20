@@ -70,3 +70,24 @@ python scripts/merge_review.py --rules submission/de_an/rules.json --review subm
 ```
 Script sẽ tự động kiểm tra định dạng và báo lỗi nếu có dòng nào chưa điền, ghi chú < 20 ký tự, hoặc còn `swap` chưa đổi.
 `review_log.csv` **phải nằm ở `submission/de_an/`** (vị trí người chấm đọc).
+
+---
+
+## 4. Review lô luyện tập 68007
+
+Ảnh: `runs/r68007_review/<tên>/` · File điền: `reviews/r68007/review_<tên>.csv` (cùng quy tắc như trên).
+
+| Người | Ứng viên |
+|---|---|
+| Quang | 000000001353 bbox_drift, 000000001584 instance_merge, 000000002923 instance_merge |
+| Ngọc Mai | 000000003845 instance_merge, 000000006894 swap, 000000008277 swap |
+| Mạnh | đã xong (9772, 9914, 12639) |
+| Ngọc | 000000016249 missing_box, 000000023781 instance_merge |
+
+## 5. Chốt bài (một lệnh, chạy lại bao nhiêu lần cũng được)
+
+```powershell
+$env:PYTHONUTF8 = "1"
+py tools/finalize.py
+```
+Ghép mọi file review → `submission/de_an/review_log.csv` + `errors.json`; lô 68007: `errors.json` → dựng v2 → đóng gói → `check_handover` → export `submission/r68007`. Cuối cùng in danh sách ảnh **còn chưa review**.

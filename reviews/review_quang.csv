@@ -1,4 +1,4 @@
 image,type,verdict,note
-img_0019,swap,,
-img_0029,swap,,
-img_0041,missing_box,,
+img_0019,class_swap,confirmed,"vật trong tay em bé là điều khiển TV màu xám, nhiều nút số, nút đỏ ở đầu; panoptic ghi remote đúng, detection ghi cell phone sai"
+img_0029,class_swap,confirmed,"góc trên phải là phần tựa ghế gỗ đơn cạnh mép chảo, không phải sofa; panoptic ghi chair đúng, detection ghi couch sai"
+img_0041,missing_box,confirmed,"con dao cắt bánh lưỡi đen nhìn rõ, tay người cầm cắm vào bánh cưới, panoptic có segment knife nhưng detection không có box knife"

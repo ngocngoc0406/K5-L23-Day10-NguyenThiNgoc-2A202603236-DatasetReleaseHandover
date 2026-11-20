@@ -9,6 +9,14 @@
    "target": "000000014038"
   },
   {
+   "type": "category_swap",
+   "target": "000000006894"
+  },
+  {
+   "type": "class_swap",
+   "target": "000000008277"
+  },
+  {
    "type": "duplicate_box",
    "target": "000000002923"
   },
@@ -27,6 +35,10 @@
   {
    "type": "instance_merge",
    "target": "000000009772"
+  },
+  {
+   "type": "instance_merge",
+   "target": "000000023781"
   },
   {
    "type": "invalid_category_id",

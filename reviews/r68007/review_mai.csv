@@ -1,0 +1,4 @@
+image,type,verdict,note
+000000003845,instance_merge,rejected,"chỉ một lát cà rốt cam (box #9) cạnh bông cải trên đĩa cơm, mang 2 box carrot gần trùng; là duplicate_box đã có trong lỗi luật, không phải 2 củ bị gộp"
+000000006894,category_swap,confirmed,"người đàn ông đeo kính, áo phông xám, ngửa cổ cười khi voi đặt vòi lên vai; detection ghi person đúng, panoptic ghi bicycle sai"
+000000008277,class_swap,confirmed,"hộp nhựa đen vuông miệng rộng, không quai, đựng bông cải sốt phô mai trên đĩa giấy, giống bát chứ không phải cốc; panoptic bowl đúng, detection cup sai"

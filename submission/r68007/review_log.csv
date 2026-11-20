@@ -1,4 +1,12 @@
 image,type,verdict,note
-000000009772,instance_merge,confirmed,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): ảnh có hai lòng bồn rửa trắng và vòi riêng; detection có hai box sink, nhưng panoptic chỉ có một segment sink bao cả hai bồn. Nhóm đã xem lại và xác nhận."
-000000009914,missing_box,confirmed,Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): bát xanh lớn đựng sốt đỏ ở phía trái hiện rõ và có segment bowl; detection chỉ có box cho bát nhỏ phía trên nên bỏ sót bát lớn. Nhóm đã xem lại và xác nhận.
-000000012639,bbox_drift,confirmed,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): box người ngồi áo xanh ở nhóm khán giả phía sau lệch sang phải và xuống dưới, cắt phần đầu/vai trái và ôm thêm nền đất so với ảnh và mask. Nhóm đã xem lại và xác nhận."
+000000003845,instance_merge,rejected,"chỉ một lát cà rốt cam (box #9) cạnh bông cải trên đĩa cơm, mang 2 box carrot gần trùng; là duplicate_box đã có trong lỗi luật, không phải 2 củ bị gộp"
+000000006894,category_swap,confirmed,"người đàn ông đeo kính, áo phông xám, ngửa cổ cười khi voi đặt vòi lên vai; detection ghi person đúng, panoptic ghi bicycle sai"
+000000008277,class_swap,confirmed,"hộp nhựa đen vuông miệng rộng, không quai, đựng bông cải sốt phô mai trên đĩa giấy, giống bát chứ không phải cốc; panoptic bowl đúng, detection cup sai"
+000000009772,instance_merge,confirmed,"ảnh có hai lòng bồn rửa trắng và vòi riêng; detection có hai box sink, nhưng panoptic chỉ có một segment sink bao cả hai bồn. Nhóm đã xem lại và xác nhận."
+000000009914,missing_box,confirmed,bát xanh lớn đựng sốt đỏ ở phía trái hiện rõ và có segment bowl; detection chỉ có box cho bát nhỏ phía trên nên bỏ sót bát lớn. Nhóm đã xem lại và xác nhận.
+000000012639,bbox_drift,confirmed,"box người ngồi áo xanh ở nhóm khán giả phía sau lệch sang phải và xuống dưới, cắt phần đầu/vai trái và ôm thêm nền đất so với ảnh và mask. Nhóm đã xem lại và xác nhận."
+000000016249,missing_box,rejected,"mọi ghế dài nhìn thấy đều có box (ghế ông đọc báo #6, ghế trống #4, ghế ông áo đỏ #8/#7); không ghế nào thiếu box, ảnh đã có lỗi thing_overlap"
+000000023781,instance_merge,confirmed,"mask carrot của củ cà rốt nằm ngang (box #3) kéo lên trùm cả củ cà rốt nhỏ phía sau giữa đám củ cải đỏ (box #5): hai củ riêng chỉ có một segment"
+000000001353,bbox_drift,rejected,"box #5 vẫn bao đúng cậu bé tóc xoăn đang cười giữa toa tàu, segment nằm trọn trong box; box rộng hơn do bị bạn ngồi trước che, lệch tự nhiên"
+000000001584,instance_merge,rejected,"nhóm người đi bộ rất nhỏ (~12x38 px) đứng sát nhau trên vỉa hè cạnh xe buýt đỏ, mờ và chồng nhau; không thấy hai người riêng bị gộp mask"
+000000002923,instance_merge,rejected,"chỉ có một thuyền trắng nhỏ ở bến bên trái mang 2 box boat gần trùng; đó là duplicate_box đã có trong lỗi luật, không phải 2 thuyền bị gộp"

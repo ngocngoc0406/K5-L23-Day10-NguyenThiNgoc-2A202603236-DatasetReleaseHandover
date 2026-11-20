@@ -1,4 +1,4 @@
 image,type,verdict,note
-000000009772,instance_merge,confirmed,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): ảnh có hai lòng bồn rửa trắng và vòi riêng; detection có hai box sink, nhưng panoptic chỉ có một segment sink bao cả hai bồn. Nhóm đã xem lại và xác nhận."
-000000009914,missing_box,confirmed,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): bát xanh lớn đựng sốt đỏ ở phía trái hiện rõ và có segment bowl; detection chỉ có box cho bát nhỏ phía trên nên bỏ sót bát lớn. Nhóm đã xem lại và xác nhận."
-000000012639,bbox_drift,confirmed,"Kết quả review của nhóm (AI hỗ trợ soạn ghi chú): box người ngồi áo xanh ở nhóm khán giả phía sau lệch sang phải và xuống dưới, cắt phần đầu/vai trái và ôm thêm nền đất so với ảnh và mask. Nhóm đã xem lại và xác nhận."
+000000009772,instance_merge,confirmed,"ảnh có hai lòng bồn rửa trắng và vòi riêng; detection có hai box sink, nhưng panoptic chỉ có một segment sink bao cả hai bồn. Nhóm đã xem lại và xác nhận."
+000000009914,missing_box,confirmed,"bát xanh lớn đựng sốt đỏ ở phía trái hiện rõ và có segment bowl; detection chỉ có box cho bát nhỏ phía trên nên bỏ sót bát lớn. Nhóm đã xem lại và xác nhận."
+000000012639,bbox_drift,confirmed,"box người ngồi áo xanh ở nhóm khán giả phía sau lệch sang phải và xuống dưới, cắt phần đầu/vai trái và ôm thêm nền đất so với ảnh và mask. Nhóm đã xem lại và xác nhận."

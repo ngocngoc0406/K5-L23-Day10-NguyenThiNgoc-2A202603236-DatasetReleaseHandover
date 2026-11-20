@@ -1,0 +1,4 @@
+image,type,verdict,note
+000000001353,bbox_drift,rejected,"box #5 vẫn bao đúng cậu bé tóc xoăn đang cười giữa toa tàu, segment nằm trọn trong box; box rộng hơn do bị bạn ngồi trước che, lệch tự nhiên"
+000000001584,instance_merge,rejected,"nhóm người đi bộ rất nhỏ (~12x38 px) đứng sát nhau trên vỉa hè cạnh xe buýt đỏ, mờ và chồng nhau; không thấy hai người riêng bị gộp mask"
+000000002923,instance_merge,rejected,"chỉ có một thuyền trắng nhỏ ở bến bên trái mang 2 box boat gần trùng; đó là duplicate_box đã có trong lỗi luật, không phải 2 thuyền bị gộp"

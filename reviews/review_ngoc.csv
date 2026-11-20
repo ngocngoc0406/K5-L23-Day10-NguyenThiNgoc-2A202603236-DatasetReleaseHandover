@@ -1,4 +1,4 @@
 image,type,verdict,note
-img_0177,missing_box,,
-img_0190,swap,,
-img_0214,missing_box,,
+img_0177,missing_box,confirmed,"mèo Xiêm nằm trên laptop bạc đang mở, thấy rõ màn hình, bàn phím, touchpad; detection chỉ có box cat, thiếu box laptop"
+img_0190,class_swap,confirmed,"con vật ở mép trái màu nâu sẫm, đuôi lông đen dài như ngựa đang được cưỡi bên cạnh; panoptic ghi horse đúng, detection ghi cow sai"
+img_0214,missing_box,rejected,"mọi xe nhìn thấy (bạc, van cam, đỏ, xe mép phải) đều có box; segment car 488 px chỉ là dải mỏng phần xe bị người và xe khác che, lệch tự nhiên"

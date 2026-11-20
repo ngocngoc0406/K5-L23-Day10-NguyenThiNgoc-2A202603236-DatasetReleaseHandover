@@ -1,0 +1,3 @@
+image,type,verdict,note
+000000016249,missing_box,rejected,"mọi ghế dài nhìn thấy đều có box (ghế ông đọc báo #6, ghế trống #4, ghế ông áo đỏ #8/#7); không ghế nào thiếu box, ảnh đã có lỗi thing_overlap"
+000000023781,instance_merge,confirmed,"mask carrot của củ cà rốt nằm ngang (box #3) kéo lên trùm cả củ cà rốt nhỏ phía sau giữa đám củ cải đỏ (box #5): hai củ riêng chỉ có một segment"

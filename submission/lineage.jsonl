@@ -3,3 +3,4 @@
 {"event": "decision", "release_id": "lab250_1bfe29bf7f88", "decision": "HOLD"}
 {"event": "release", "release_id": "lab250_1bfe29bf7f88_v2", "parent": "lab250_1bfe29bf7f88"}
 {"event": "decision", "release_id": "lab250_1bfe29bf7f88_v2", "decision": "HOLD", "detail": "pending_review=8; human_reviewed=3/11; source=real_delivery"}
+{"event": "decision", "release_id": "lab250_1bfe29bf7f88_v2", "decision": "RELEASE", "detail": "review xong 11/11 ung vien; QC v1 15/250=6.0%; rework 6 anh"}
