@@ -1,5 +1,5 @@
 class,count
-person,584
+person,571
 bicycle,11
 car,55
 motorcycle,21
@@ -32,8 +32,8 @@ skis,5
 snowboard,1
 sports ball,6
 kite,21
-baseball bat,4
-baseball glove,6
+baseball bat,3
+baseball glove,5
 skateboard,8
 surfboard,14
 tennis racket,7
@@ -41,16 +41,16 @@ bottle,47
 wine glass,41
 cup,56
 fork,11
-knife,22
+knife,21
 spoon,12
-bowl,31
+bowl,30
 banana,19
 apple,4
-sandwich,14
+sandwich,12
 orange,1
 broccoli,15
 carrot,14
-hot dog,12
+hot dog,11
 pizza,14
 donut,1
 cake,3
@@ -58,7 +58,7 @@ chair,81
 couch,13
 potted plant,8
 bed,9
-dining table,30
+dining table,29
 toilet,5
 tv,16
 laptop,16
@@ -75,4 +75,4 @@ clock,8
 vase,16
 scissors,2
 teddy bear,7
-TOTAL,1688
+TOTAL,1667

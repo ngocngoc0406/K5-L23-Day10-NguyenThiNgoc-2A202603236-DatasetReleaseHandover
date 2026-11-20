@@ -2,3 +2,4 @@
 {"event": "train", "release_id": "lab250_1bfe29bf7f88", "run_id": "R-021"}
 {"event": "decision", "release_id": "lab250_1bfe29bf7f88", "decision": "HOLD"}
 {"event": "release", "release_id": "lab250_1bfe29bf7f88_v2", "parent": "lab250_1bfe29bf7f88"}
+{"event": "decision", "release_id": "lab250_1bfe29bf7f88_v2", "decision": "HOLD", "detail": "pending_review=8; human_reviewed=3/11; source=real_delivery"}

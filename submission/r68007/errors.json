@@ -1,6 +1,10 @@
 {
  "errors": [
   {
+   "type": "bbox_drift",
+   "target": "000000012639"
+  },
+  {
    "type": "bbox_out_of_bounds",
    "target": "000000014038"
   },
@@ -21,8 +25,16 @@
    "target": "000000019109"
   },
   {
+   "type": "instance_merge",
+   "target": "000000009772"
+  },
+  {
    "type": "invalid_category_id",
    "target": "000000010707"
+  },
+  {
+   "type": "missing_box",
+   "target": "000000009914"
   },
   {
    "type": "scene_leak",

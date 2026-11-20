@@ -1,0 +1,97 @@
+{
+  "source": "real_delivery_seed_68007",
+  "total_candidates": 11,
+  "human_reviewed": 3,
+  "pending_count": 8,
+  "status": "awaiting_remaining_human_reviews",
+  "candidates": [
+    {
+      "type": "bbox_drift",
+      "target": "000000001353",
+      "reason": "box person: IoU 0.92, 100% pixel segment trong box, 2/4 mép khớp",
+      "bbox": [
+        134.0,
+        180.5,
+        210.0,
+        253.3
+      ]
+    },
+    {
+      "type": "instance_merge",
+      "target": "000000001584",
+      "reason": "1 segment person phủ 2 box cùng lớp",
+      "bbox": [
+        114,
+        392,
+        126,
+        430
+      ]
+    },
+    {
+      "type": "instance_merge",
+      "target": "000000002923",
+      "reason": "1 segment boat phủ 2 box cùng lớp",
+      "bbox": [
+        24,
+        197,
+        52,
+        215
+      ]
+    },
+    {
+      "type": "instance_merge",
+      "target": "000000003845",
+      "reason": "1 segment carrot phủ 2 box cùng lớp",
+      "bbox": [
+        259,
+        190,
+        296,
+        261
+      ]
+    },
+    {
+      "type": "swap",
+      "target": "000000006894",
+      "reason": "detection ghi 'person', panoptic ghi 'bicycle'",
+      "bbox": [
+        293.4,
+        20.5,
+        640.0,
+        480.0
+      ]
+    },
+    {
+      "type": "swap",
+      "target": "000000008277",
+      "reason": "detection ghi 'cup', panoptic ghi 'bowl'",
+      "bbox": [
+        19.2,
+        34.4,
+        464.8,
+        361.2
+      ]
+    },
+    {
+      "type": "missing_box",
+      "target": "000000016249",
+      "reason": "segment bench (5928 px) không có box",
+      "bbox": [
+        223,
+        101,
+        480,
+        313
+      ]
+    },
+    {
+      "type": "instance_merge",
+      "target": "000000023781",
+      "reason": "1 segment carrot phủ 2 box cùng lớp",
+      "bbox": [
+        338,
+        270,
+        475,
+        337
+      ]
+    }
+  ]
+}

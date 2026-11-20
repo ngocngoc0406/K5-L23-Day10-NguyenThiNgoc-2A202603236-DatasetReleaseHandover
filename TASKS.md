@@ -84,16 +84,16 @@
 - Vấn đáp: ghép bằng pixel mask, phân biệt swap/drift/merge
 
 ### 👤 Mạnh (TV3)
-- [ ] Đọc `scripts/check_handover.py`, ghi H1–H17 kiểm gì
-- [ ] Viết tay `errors_test.json` (mỗi loại lỗi 1–2 ảnh) để thử
-- [ ] `tools/build_v2.py` tạo `runs/r<seed>/handover/<id>_v2/`:
+- [x] Đọc `scripts/check_handover.py`, ghi H1–H17 kiểm gì — xem `submission/TV3_CHECKS.txt`.
+- [x] Viết tay `errors_test.json` (mỗi loại lỗi 1–2 ảnh) để thử — 14 loại, 16 trường hợp giả; đã kiểm thử riêng, không dùng làm kết quả thật.
+- [x] `tools/build_v2.py` tạo `runs/r<seed>/handover/<id>_v2/`:
   - images/labels của v1, **bỏ** ảnh lỗi detection hoặc thiếu file; ảnh chỉ lỗi panoptic **ở lại**
   - `rework_queue.csv` (người theo `jobs.csv`), `truyvet.csv` (guideline theo job, mỗi cảnh một split)
   - `manifest.csv`, `label_summary.csv` (+ `TOTAL`), `README.txt` (số liệu tự sinh + Ghi chú của Ngọc)
-- [ ] Xem phần 3 → `review_manh.csv`
-- [ ] QC v1 = số ảnh lỗi / 250, trên 2% thì HOLD: `lineage.py record --event decision --release-id <id> --decision HOLD`; `lineage.py impact --release-id <id>` → `R-021: affected=True`
-- [ ] Chạy `build_v2.py` với `errors.json` thật → `pack_release.py` → `lineage.py record --event release --release-id <id>_v2 --parent <id>` → `check_handover.py --run runs/r<seed>` → **Commit 1**
-- [ ] REPORT §3, §4; nhận `trace.json`, `security.md` từ Ngọc; `check_handover.py` không còn FAIL; `export_submission.py --run runs/r<seed>` → **Commit 2**, push
+- [x] Xem phần 3 → `review_manh.csv` — đã chốt 3/3 ảnh đề ẩn và 3/3 ảnh phần 3/4 lô luyện tập; hai file nằm riêng ở `reviews/review_manh.csv` và `reviews/r68007/review_manh.csv`, ghi chú có nêu AI hỗ trợ soạn.
+- [x] QC v1 = số ảnh lỗi / 250, trên 2% thì HOLD: `lineage.py record --event decision --release-id <id> --decision HOLD`; `lineage.py impact --release-id <id>` → `R-021: affected=True` — chạy thật được 12/250 = 4,8%, gồm 9 lỗi luật và 3 lỗi review đã xác nhận.
+- [x] Chạy `build_v2.py` với `errors.json` thật → `pack_release.py` → `lineage.py record --event release --release-id <id>_v2 --parent <id>` → `check_handover.py --run runs/r<seed>` → **Commit 1** (`e8e6cc6`). Pipeline thật đạt 17 PASS, 0 FAIL; v2 Hold vì còn 8 ứng viên chờ review.
+- [x] REPORT §3, §4; nhận `trace.json`, `security.md` từ Ngọc; `check_handover.py` không còn FAIL; `export_submission.py --run runs/r<seed>` → **Commit 2**, push bản bàn giao hiện tại theo yêu cầu. Bản export có 245 ảnh, 1.667 box, 5 ảnh rework và giữ Hold; việc chốt bản Release cuối chờ 8 review còn lại.
 - Vấn đáp: mọi con số trong `README.txt` v2, hash chứng minh gì
 
 ### 👤 Ngọc (TV4)
