@@ -1,0 +1,4 @@
+{"event": "inject", "release_id": "lab250_1bfe29bf7f88", "seed": 68007, "detail": "r68007"}
+{"event": "train", "release_id": "lab250_1bfe29bf7f88", "run_id": "R-021"}
+{"event": "decision", "release_id": "lab250_1bfe29bf7f88", "decision": "HOLD"}
+{"event": "release", "release_id": "lab250_1bfe29bf7f88_v2", "parent": "lab250_1bfe29bf7f88"}

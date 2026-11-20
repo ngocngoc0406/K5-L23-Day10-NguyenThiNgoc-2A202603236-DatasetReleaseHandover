@@ -1,0 +1,4 @@
+image,type,annotator,reviewer,action
+000000002923,duplicate_box,A01,Q02,gán lại nhãn detection
+000000003845,duplicate_box,A01,Q02,gán lại nhãn detection
+000000014038,bbox_out_of_bounds,A01,Q02,gán lại nhãn detection
